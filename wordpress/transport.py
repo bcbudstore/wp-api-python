@@ -55,7 +55,7 @@ class API_Requests_Wrapper(object):
 
     def request(self, method, url, auth=None, params=None, data=None, **kwargs):
         headers = {
-            "user-agent": "Wordpress API Client-Python/%s" % __version__,
+            "user-agent": "BCBS Wordpress API Client-Python/%s" % __version__,
             "accept": "application/json"
         }
         if data is not None:

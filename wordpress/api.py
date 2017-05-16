@@ -76,7 +76,7 @@ class API(object):
     def callback(self):
         return self.oauth.callback
 
-    def __request(self, method, endpoint, data):
+    def __request(self, method, endpoint, data, **kwargs):
         """ Do requests """
         endpoint_url = self.requester.endpoint_url(endpoint)
         # endpoint_params = UrlUtils.get_query_dict_singular(endpoint_url)
@@ -131,13 +131,13 @@ class API(object):
         """ Get requests """
         return self.__request("GET", endpoint, None)
 
-    def post(self, endpoint, data):
+    def post(self, endpoint, data, **kwargs):
         """ POST requests """
-        return self.__request("POST", endpoint, data)
+        return self.__request("POST", endpoint, data, **kwargs)
 
-    def put(self, endpoint, data):
+    def put(self, endpoint, data, **kwargs):
         """ PUT requests """
-        return self.__request("PUT", endpoint, data)
+        return self.__request("PUT", endpoint, data, **kwargs)
 
     def delete(self, endpoint):
         """ DELETE requests """
