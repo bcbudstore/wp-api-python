@@ -109,12 +109,15 @@ class API(object):
         if str(bool(isTrue)) == trueStr:
             data = jsonencode(data, ensure_ascii=False).encode('utf-8')
 
+        headers = kwargs.get('headers', {})
+
         response = self.requester.request(
             method=method,
             url=endpoint_url,
             auth=auth,
             params=endpoint_params,
-            data=data
+            data=data,
+            headers=headers
         )
 
         assert \
