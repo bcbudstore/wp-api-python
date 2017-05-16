@@ -136,11 +136,13 @@ class API(object):
 
     def post(self, endpoint, data, **kwargs):
         """ POST requests """
-        return self.__request("POST", endpoint, data, **kwargs)
+        headers = kwargs.get('headers', {})
+        return self.__request("POST", endpoint, data, headers=headers)
 
     def put(self, endpoint, data, **kwargs):
         """ PUT requests """
-        return self.__request("PUT", endpoint, data, **kwargs)
+        headers = kwargs.get('headers', {})
+        return self.__request("PUT", endpoint, data, headers=headers)
 
     def delete(self, endpoint):
         """ DELETE requests """
