@@ -76,8 +76,8 @@ class API_Requests_Wrapper(object):
             **request_kwargs
         )
 
-    def get(self, *args):
-        return self.request("GET", *args)
+    def get(self, *args, **kwargs):
+        return self.request("GET", *args, **kwargs)
 
-    def post(self, *args):
-        return self.request("POST", *args)
+    def post(self, *args, **kwargs):
+        return self.request("POST", *args, **kwargs)
