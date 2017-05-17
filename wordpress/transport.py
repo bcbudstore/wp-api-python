@@ -61,8 +61,11 @@ class API_Requests_Wrapper(object):
         if data is not None:
             headers["content-type"] = "application/json;charset=utf-8"
 
-        args_headers = kwargs.get('headers', '[]')
 
+        args_headers = kwargs.get('headers', '{}')
+
+        if args_headers:
+            kwargs.pop("headers")
         for k, v in args_headers:
             headers[k] = v
 
