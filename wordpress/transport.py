@@ -72,6 +72,8 @@ class API_Requests_Wrapper(object):
 
         print headers
 
+        print kwargs
+
         request_kwargs = dict(
             method=method,
             url=url,
