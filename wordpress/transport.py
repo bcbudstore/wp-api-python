@@ -69,6 +69,8 @@ class API_Requests_Wrapper(object):
         for k, v in args_headers:
             headers[k] = v
 
+        print headers
+
         request_kwargs = dict(
             method=method,
             url=url,
@@ -77,6 +79,9 @@ class API_Requests_Wrapper(object):
             timeout=self.timeout,
         )
         request_kwargs.update(kwargs)
+
+        print headers
+
         if auth is not None: request_kwargs['auth'] = auth
         if params is not None: request_kwargs['params'] = params
         if data is not None: request_kwargs['data'] = data
