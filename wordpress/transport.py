@@ -69,7 +69,7 @@ class API_Requests_Wrapper(object):
             kwargs.pop("headers")
             for k, v in args_headers:
                 headers[k] = v
-            kwargs.update({"headers": headers})
+            kwargs["headers"] = headers
 
         print headers
 
