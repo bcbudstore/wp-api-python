@@ -72,9 +72,9 @@ class API_Requests_Wrapper(object):
                 headers[k] = v
             kwargs["headers"] = headers
 
-        print headers
+        print "HEADERS DICT before: " + str(headers)
 
-        print kwargs
+        print "KWARGS: " + str(kwargs)
 
         request_kwargs = dict(
             method=method,
@@ -85,8 +85,8 @@ class API_Requests_Wrapper(object):
         )
         request_kwargs.update(kwargs)
 
-        print headers
-        print request_kwargs
+        print "HEADERS DICT after: " + str(headers)
+        print "REQUEST KWARGS :" + str(request_kwargs)
 
         if auth is not None: request_kwargs['auth'] = auth
         if params is not None: request_kwargs['params'] = params
