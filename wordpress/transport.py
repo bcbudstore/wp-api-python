@@ -56,7 +56,8 @@ class API_Requests_Wrapper(object):
     def request(self, method, url, auth=None, params=None, data=None, **kwargs):
         headers = {
             "user-agent": "BCBS Wordpress API Client-Python/%s" % __version__,
-            "accept": "application/json"
+            "accept": "application/json",
+            "referer": "https://bcbud.store/"
         }
         if data is not None:
             headers["content-type"] = "application/json;charset=utf-8"
