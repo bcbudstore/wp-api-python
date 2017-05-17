@@ -109,7 +109,7 @@ class API(object):
         if str(bool(isTrue)) == trueStr:
             data = jsonencode(data, ensure_ascii=False).encode('utf-8')
 
-        headers = kwargs.get('headers', {})
+        headers = kwargs.get('headers', [])
 
         response = self.requester.request(
             method=method,
@@ -136,13 +136,11 @@ class API(object):
 
     def post(self, endpoint, data, **kwargs):
         """ POST requests """
-        headers = kwargs.get('headers', {})
-        return self.__request("POST", endpoint, data, headers=headers)
+        return self.__request("POST", endpoint, data, **kwargs)
 
     def put(self, endpoint, data, **kwargs):
         """ PUT requests """
-        headers = kwargs.get('headers', {})
-        return self.__request("PUT", endpoint, data, headers=headers)
+        return self.__request("PUT", endpoint, data, **kwargs)
 
     def delete(self, endpoint):
         """ DELETE requests """
