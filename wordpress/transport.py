@@ -62,8 +62,9 @@ class API_Requests_Wrapper(object):
             headers["content-type"] = "application/json;charset=utf-8"
 
         args_headers = kwargs.get('headers', '[]')
-        for key, val in args_headers:
-            headers[key] = val
+
+        for k, v in args_headers:
+            headers[k] = v
 
         request_kwargs = dict(
             method=method,
