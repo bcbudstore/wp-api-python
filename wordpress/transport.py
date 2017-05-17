@@ -64,6 +64,7 @@ class API_Requests_Wrapper(object):
 
 
         args_headers = kwargs.get("headers", False)
+        print args_headers
 
         if args_headers:
             for k, v in args_headers.iteritems():
