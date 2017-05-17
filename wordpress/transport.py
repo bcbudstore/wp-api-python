@@ -78,7 +78,7 @@ class API_Requests_Wrapper(object):
         request_kwargs = dict(
             method=method,
             url=url,
-           # headers=headers,
+            headers=headers,
             verify=self.verify_ssl,
             timeout=self.timeout,
         )
