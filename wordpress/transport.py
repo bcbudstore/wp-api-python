@@ -63,10 +63,11 @@ class API_Requests_Wrapper(object):
             headers["content-type"] = "application/json;charset=utf-8"
 
 
-        args_headers = kwargs.get('headers', '{}')
+        args_headers = kwargs.get("headers", False)
 
         if args_headers:
-            for k, v in args_headers:
+            for k, v in args_headers.iteritems():
+
                 headers[k] = v
             kwargs["headers"] = headers
 
