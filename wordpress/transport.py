@@ -82,6 +82,7 @@ class API_Requests_Wrapper(object):
         request_kwargs.update(kwargs)
 
         print headers
+        print request_kwargs
 
         if auth is not None: request_kwargs['auth'] = auth
         if params is not None: request_kwargs['params'] = params
