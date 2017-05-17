@@ -111,7 +111,6 @@ class API(object):
 
         headers = kwargs.get("headers", {})
 
-
         response = self.requester.request(
             method=method,
             url=endpoint_url,
