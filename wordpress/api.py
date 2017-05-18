@@ -83,8 +83,6 @@ class API(object):
         endpoint_params = {}
         auth = None
 
-        oauth1 = kwargs.ge
-
         if self.requester.is_ssl is True and self.requester.query_string_auth is False:
             auth = (self.oauth.consumer_key, self.oauth.consumer_secret)
         elif self.requester.is_ssl is True and self.requester.query_string_auth is True:
