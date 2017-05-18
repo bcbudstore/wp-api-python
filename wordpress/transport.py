@@ -57,7 +57,6 @@ class API_Requests_Wrapper(object):
         headers = {
             "user-agent": "BCBS Wordpress API Client-Python/%s" % __version__,
             "accept": "application/json",
-            "referrer": "https://bcbud.store/"
         }
         if data is not None:
             headers["content-type"] = "application/json;charset=utf-8"
@@ -72,9 +71,9 @@ class API_Requests_Wrapper(object):
                 headers[k] = v
             kwargs["headers"] = headers
 
-        # print "HEADERS DICT before: " + str(headers)
+        print "HEADERS DICT before: " + str(headers)
 
-        # print "KWARGS: " + str(kwargs)
+        print "KWARGS: " + str(kwargs)
 
         request_kwargs = dict(
             method=method,
@@ -85,7 +84,7 @@ class API_Requests_Wrapper(object):
         )
         request_kwargs.update(kwargs)
 
-        # print "HEADERS DICT after: " + str(headers)
+        print "HEADERS DICT after: " + str(headers)
         print "REQUEST KWARGS :" + str(request_kwargs)
 
         if auth is not None: request_kwargs['auth'] = auth
