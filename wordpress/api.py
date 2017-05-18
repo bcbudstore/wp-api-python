@@ -86,10 +86,10 @@ class API(object):
         if self.requester.is_ssl is True and self.requester.query_string_auth is False:
             auth = (self.oauth.consumer_key, self.oauth.consumer_secret)
         elif self.requester.is_ssl is True and self.requester.query_string_auth is True:
-            endpoint_params.update({
+            endpoint_params = {
                 "consumer_key": self.oauth.consumer_key,
                 "consumer_secret": self.oauth.consumer_secret
-            })
+            }
         else:
             endpoint_url = self.oauth.get_oauth_url(endpoint_url, method)
 
@@ -114,10 +114,13 @@ class API(object):
         response = self.requester.request(
             method=method,
             url=endpoint_url,
+            verify=self.verify_ssl,
             auth=auth,
             params=endpoint_params,
             data=data,
+            timeout=self.timeout,
             headers=headers
+
         )
 
         assert \
