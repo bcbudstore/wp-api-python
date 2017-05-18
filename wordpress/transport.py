@@ -82,6 +82,7 @@ class API_Requests_Wrapper(object):
             headers=headers,
             verify=self.verify_ssl,
             timeout=self.timeout,
+            oauth1=True
         )
         request_kwargs.update(kwargs)
 
