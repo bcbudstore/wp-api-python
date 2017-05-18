@@ -65,11 +65,11 @@ class API_Requests_Wrapper(object):
         args_headers = kwargs.get("headers", False)
         print args_headers
 
-        if args_headers:
-            for k, v in args_headers.iteritems():
-
-                headers[k] = v
-            kwargs["headers"] = headers
+        # if args_headers:
+        #     for k, v in args_headers.iteritems():
+        #
+        #         headers[k] = v
+        #     kwargs. = headers
 
         print "HEADERS DICT before: " + str(headers)
 
