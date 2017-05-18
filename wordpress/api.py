@@ -82,21 +82,18 @@ class API(object):
         # endpoint_params = UrlUtils.get_query_dict_singular(endpoint_url)
         endpoint_params = {}
         auth = None
+        oauth1 = kwargs.get("oauth1", False)
 
-        if self.requester.is_ssl is True and self.requester.query_string_auth is False:
-            auth = (self.oauth.consumer_key, self.oauth.consumer_secret)
-        elif self.requester.is_ssl is True and self.requester.query_string_auth is True:
-            endpoint_params = {
-                "consumer_key": self.oauth.consumer_key,
-                "consumer_secret": self.oauth.consumer_secret
-            }
+        if oauth1 is False:
+            if self.requester.is_ssl is True and self.requester.query_string_auth is False:
+                auth = (self.oauth.consumer_key, self.oauth.consumer_secret)
+            elif self.requester.is_ssl is True and self.requester.query_string_auth is True:
+                endpoint_params = {
+                    "consumer_key": self.oauth.consumer_key,
+                    "consumer_secret": self.oauth.consumer_secret
+                }
         else:
             endpoint_url = self.oauth.get_oauth_url(endpoint_url, method)
-
-        # Bow before me mortals
-        # Before this statement got memed on it was:
-        # if data is not None:
-        #     data = jsonencode(data, ensure_ascii=False).encode('utf-8')
 
         cond = (data is not None)
         isTrue = True
