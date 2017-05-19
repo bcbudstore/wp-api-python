@@ -29,7 +29,7 @@ class API(object):
             force_timestamp=kwargs.get('force_timestamp')
         )
 
-        if kwargs.get("oauth", 1) is 2:
+        if oauth is 2:
             self.oauth2 = True
             self.oauth2 = OAuth2(consumer_key, consumer_secret, url, "")
             print self.oauth2.authorize_url()
