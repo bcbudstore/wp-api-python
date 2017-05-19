@@ -11,11 +11,13 @@ from json import dumps as jsonencode
 from wordpress.oauth import OAuth, OAuth_3Leg
 from wordpress.transport import API_Requests_Wrapper
 from wordpress.helpers import UrlUtils
+from requests_oauth2 import OAuth2
+
 
 class API(object):
     """ API Class """
 
-    def __init__(self, url, consumer_key, consumer_secret, **kwargs):
+    def __init__(self, url, consumer_key, consumer_secret, oauth=1, **kwargs):
 
         self.requester = API_Requests_Wrapper(url=url, **kwargs)
 
@@ -27,7 +29,16 @@ class API(object):
             force_timestamp=kwargs.get('force_timestamp')
         )
 
-        if kwargs.get('oauth1a_3leg'):
+        if kwargs.get("oauth", 1) is 2:
+            self.oauth2 = True
+            self.oauth2 = OAuth2(consumer_key, consumer_secret, url, "")
+            print self.oauth2.authorize_url()
+
+
+
+
+
+        elif kwargs.get('oauth1a_3leg'):
             self.oauth1a_3leg = kwargs['oauth1a_3leg']
             oauth_kwargs['callback'] = kwargs['callback']
             oauth_kwargs['wp_user'] = kwargs['wp_user']
@@ -35,6 +46,7 @@ class API(object):
             self.oauth = OAuth_3Leg( **oauth_kwargs )
         else:
             self.oauth = OAuth( **oauth_kwargs )
+
 
     @property
     def url(self):
@@ -83,7 +95,11 @@ class API(object):
         endpoint_params = {}
         auth = None
 
-        if self.requester.is_ssl is True and self.requester.query_string_auth is False:
+        if self.oauth2:
+            pass
+            # auth = "Authorization: Bearer " + self.oauth2.get_token()
+            # endpoint_url = self.oauth2.
+        elif self.requester.is_ssl is True and self.requester.query_string_auth is False:
             auth = (self.oauth.consumer_key, self.oauth.consumer_secret)
         elif self.requester.is_ssl is True and self.requester.query_string_auth is True:
             endpoint_params = {

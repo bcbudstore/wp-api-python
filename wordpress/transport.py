@@ -72,10 +72,6 @@ class API_Requests_Wrapper(object):
 
         kwargs["headers"] = headers
 
-        print "HEADERS DICT before: " + str(headers)
-
-        print "KWARGS: " + str(kwargs)
-
         request_kwargs = dict(
             method=method,
             url=url,
