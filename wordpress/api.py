@@ -105,7 +105,7 @@ class API(object):
         auth = None
 
         if self.token:
-            auth = "Authorization: Bearer " + self.token
+            auth = {"Authorization": "Bearer " + self.token}
             # endpoint_url = self.oauth2.
         elif self.oauth2 and not self.token:
             print "we're going to need to get a token, dave."
