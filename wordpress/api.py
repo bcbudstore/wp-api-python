@@ -18,6 +18,7 @@ class API(object):
     """ API Class """
 
     token = ''
+    oauth2 = False
 
     def __init__(self, url, consumer_key, consumer_secret, oauth=1, token='', **kwargs):
 
