@@ -35,7 +35,7 @@ class API(object):
 
         self.oauth_version = oauth_version
 
-        if oauth_version is 2 and token:
+        if oauth_version == 2 and token:
             self.token = token
         elif oauth_version is 2 and not token:
             self.oauth2 = OAuth2(consumer_key, consumer_secret, url, "")
@@ -104,7 +104,7 @@ class API(object):
         endpoint_params = {}
         auth = None
 
-        if self.oauth2 and self.token:
+        if self.token:
             auth = "Authorization: Bearer " + self.token
             # endpoint_url = self.oauth2.
         elif self.oauth2 and not self.token:
