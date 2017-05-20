@@ -18,9 +18,10 @@ class API(object):
     """ API Class """
 
     token = ''
+    oauth_version = 1
     oauth2 = False
 
-    def __init__(self, url, consumer_key, consumer_secret, oauth=1, token='', **kwargs):
+    def __init__(self, url, consumer_key, consumer_secret, oauth_version=1, token='', **kwargs):
 
         self.requester = API_Requests_Wrapper(url=url, **kwargs)
 
@@ -32,9 +33,9 @@ class API(object):
             force_timestamp=kwargs.get('force_timestamp')
         )
 
-        if oauth is 2 and token:
+        if oauth_version is 2 and token:
             self.token = token
-        elif oauth is 2 and not token:
+        elif oauth_version is 2 and not token:
             self.oauth2 = OAuth2(consumer_key, consumer_secret, url, "")
             print self.oauth2.authorize_url()
 
@@ -104,6 +105,8 @@ class API(object):
         if self.oauth2 and self.token:
             auth = "Authorization: Bearer " + self.token
             # endpoint_url = self.oauth2.
+        elif self.oauth2 and not self.token:
+            print "we're going to need to get a token, dave."
         elif self.requester.is_ssl is True and self.requester.query_string_auth is False:
             auth = (self.oauth.consumer_key, self.oauth.consumer_secret)
         elif self.requester.is_ssl is True and self.requester.query_string_auth is True:
