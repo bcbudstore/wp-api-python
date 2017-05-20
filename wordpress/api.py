@@ -33,6 +33,8 @@ class API(object):
             force_timestamp=kwargs.get('force_timestamp')
         )
 
+        self.oauth_version = oauth_version
+
         if oauth_version is 2 and token:
             self.token = token
         elif oauth_version is 2 and not token:
