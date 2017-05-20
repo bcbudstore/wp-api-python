@@ -103,9 +103,10 @@ class API(object):
         # endpoint_params = UrlUtils.get_query_dict_singular(endpoint_url)
         endpoint_params = {}
         auth = None
+        auth_header = None
 
         if self.token:
-            auth = {"Authorization": "Bearer " + self.token}
+            auth_header = {"Authorization": "Bearer " + self.token}
             # endpoint_url = self.oauth2.
         elif self.oauth2 and not self.token:
             print "we're going to need to get a token, dave."
@@ -136,6 +137,7 @@ class API(object):
             data = jsonencode(data, ensure_ascii=False).encode('utf-8')
 
         headers = kwargs.get("headers", {})
+        headers.update(auth_header)
 
         response = self.requester.request(
             method=method,
