@@ -17,7 +17,9 @@ from requests_oauth2 import OAuth2
 class API(object):
     """ API Class """
 
-    def __init__(self, url, consumer_key, consumer_secret, oauth=1, **kwargs):
+    token = ''
+
+    def __init__(self, url, consumer_key, consumer_secret, oauth=1, token='', **kwargs):
 
         self.requester = API_Requests_Wrapper(url=url, **kwargs)
 
@@ -29,8 +31,9 @@ class API(object):
             force_timestamp=kwargs.get('force_timestamp')
         )
 
-        if oauth is 2:
-            self.oauth2 = True
+        if oauth is 2 and token:
+            self.token = token
+        elif oauth is 2 and not token:
             self.oauth2 = OAuth2(consumer_key, consumer_secret, url, "")
             print self.oauth2.authorize_url()
 
@@ -88,6 +91,8 @@ class API(object):
     def callback(self):
         return self.oauth.callback
 
+
+
     def __request(self, method, endpoint, data, **kwargs):
         """ Do requests """
         endpoint_url = self.requester.endpoint_url(endpoint)
@@ -95,9 +100,8 @@ class API(object):
         endpoint_params = {}
         auth = None
 
-        if self.oauth2:
-            pass
-            # auth = "Authorization: Bearer " + self.oauth2.get_token()
+        if self.oauth2 and self.token:
+            auth = "Authorization: Bearer " + self.token
             # endpoint_url = self.oauth2.
         elif self.requester.is_ssl is True and self.requester.query_string_auth is False:
             auth = (self.oauth.consumer_key, self.oauth.consumer_secret)
