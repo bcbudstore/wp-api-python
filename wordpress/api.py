@@ -103,7 +103,7 @@ class API(object):
         # endpoint_params = UrlUtils.get_query_dict_singular(endpoint_url)
         endpoint_params = {}
         auth = None
-        auth_header = None
+        auth_header = {}
 
         if self.token:
             auth_header = {"Authorization": "Bearer " + self.token}
