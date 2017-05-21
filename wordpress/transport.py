@@ -58,7 +58,9 @@ class API_Requests_Wrapper(object):
             "user-agent": "BCBS Wordpress API Client-Python/%s" % __version__,
             "accept": "application/json",
         }
-        if data is not None and not kwargs.get("files", False):
+
+        files = kwargs.get("files", False)
+        if data is not None and not files:
             headers["content-type"] = "application/json;charset=utf-8"
 
 

@@ -125,7 +125,7 @@ class API(object):
         # if data is not None:
         #     data = jsonencode(data, ensure_ascii=False).encode('utf-8')
 
-        files = kwargs.get("files", {})
+        files = kwargs.get("files", False)
 
         cond = (data is not None)
         isTrue = True
@@ -135,7 +135,7 @@ class API(object):
             if counter >= len(trueStr) or condChar != trueStr[counter]:
                 isTrue = False
             counter += 1
-        if str(bool(isTrue)) == trueStr and files is {}:
+        if str(bool(isTrue)) == trueStr and files is False:
             data = jsonencode(data, ensure_ascii=False).encode('utf-8')
 
         headers = kwargs.get("headers", {})
