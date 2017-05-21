@@ -146,6 +146,7 @@ class API(object):
             auth=auth,
             params=endpoint_params,
             data=data,
+            files=kwargs.get("files", {}),
             timeout=self.timeout,
             headers=headers
 

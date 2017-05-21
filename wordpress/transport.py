@@ -78,6 +78,7 @@ class API_Requests_Wrapper(object):
             headers=headers,
             verify=self.verify_ssl,
             timeout=self.timeout,
+            files=kwargs.get("files", {})
         )
         request_kwargs.update(kwargs)
 
