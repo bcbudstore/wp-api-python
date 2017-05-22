@@ -40,11 +40,6 @@ class API(object):
         elif oauth_version is 2 and not token:
             self.oauth2 = OAuth2(consumer_key, consumer_secret, url, "")
             print self.oauth2.authorize_url()
-
-
-
-
-
         elif kwargs.get('oauth1a_3leg'):
             self.oauth1a_3leg = kwargs['oauth1a_3leg']
             oauth_kwargs['callback'] = kwargs['callback']
@@ -53,7 +48,6 @@ class API(object):
             self.oauth = OAuth_3Leg( **oauth_kwargs )
         else:
             self.oauth = OAuth( **oauth_kwargs )
-
 
     @property
     def url(self):
