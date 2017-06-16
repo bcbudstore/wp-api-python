@@ -92,7 +92,7 @@ class OAuth2(object):
         tk = Tkinter.Tk()
         done = False
         while not done:
-            frame = LoginFrame(master=tk)
+            frame = LoginFrame()
             client_creds = frame.get_user_info()
             response = self._request_token(
                 consumer_key=self.client_id,
@@ -103,5 +103,5 @@ class OAuth2(object):
             done = response
             if self.is_json(response.text):
                 print response.json()
-                tk.destroy()
+                frame.destroy()
                 return { response.json()['access_token'], response.json()['refresh_token'] }
