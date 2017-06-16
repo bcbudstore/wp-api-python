@@ -104,3 +104,4 @@ class OAuth2(object):
             if self.is_json(response.text):
                 print response.json()
                 tk.destroy()
+                return { response.json()['access_token'], response.json()['refresh_token'] }
