@@ -17,6 +17,7 @@ class LoginFrame(tk.Frame):
             master = tk.Tk()
         self.root = master
         self.root.wm_title("Sign-in Required")
+        self.root.withdraw() # hides the root window
 
         if not form_caption:
             form_caption = "Please sign in below"
@@ -34,11 +35,11 @@ class LoginFrame(tk.Frame):
                            username, password))
         self.root.focus_set()
         self.center(tk.Toplevel(self))
-
         self.grid()
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self.root.destroy()
+        # self.root.destroy()
+        pass
 
     def submit(self, username, password):
         if not (username and password):
