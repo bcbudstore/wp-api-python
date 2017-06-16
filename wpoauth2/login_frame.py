@@ -38,9 +38,7 @@ class LoginFrame(tk.Frame):
         self.pack()
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        # self.root.destroy()
-        pass
-
+        self.root.destroy()
 
     def submit(self, username, password):
         if not (username and password):
