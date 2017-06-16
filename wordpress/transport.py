@@ -84,14 +84,14 @@ class API_Requests_Wrapper(object):
         )
         request_kwargs.update(kwargs)
 
-        print "HEADERS DICT after: " + str(headers)
-        print "REQUEST KWARGS :" + str(request_kwargs)
+        # print "HEADERS DICT after: " + str(headers)
+        # print "REQUEST KWARGS :" + str(request_kwargs)
 
         if auth is not None: request_kwargs['auth'] = auth
         if params is not None: request_kwargs['params'] = params
         if data is not None: request_kwargs['data'] = data
 
-        print "REQUEST KWARGS :" + str(request_kwargs)
+        # print "REQUEST KWARGS :" + str(request_kwargs)
 
         return self.session.request(
             **request_kwargs

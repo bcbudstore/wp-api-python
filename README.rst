@@ -1,5 +1,8 @@
 Wordpress API - Python Client
 =============================
+OAuth2 added along with client credentials token grants.
+
+---
 
 bcbudstore version now includes headers support. Original derwentx readme left below.
 

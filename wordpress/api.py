@@ -6,12 +6,11 @@ Wordpress API Class
 
 __title__ = "wordpress-api"
 
-from requests import request
 from json import dumps as jsonencode
 from wordpress.oauth import OAuth, OAuth_3Leg
 from wordpress.transport import API_Requests_Wrapper
 from wordpress.helpers import UrlUtils
-from requests_oauth2 import OAuth2
+from wpoauth2 import OAuth2, LoginFrame
 
 
 class API(object):
@@ -35,11 +34,19 @@ class API(object):
 
         self.oauth_version = oauth_version
 
-        if oauth_version == 2 and token:
+        if oauth_version is 2 and token:
             self.token = token
         elif oauth_version is 2 and not token:
-            self.oauth2 = OAuth2(consumer_key, consumer_secret, url, "")
-            print self.oauth2.authorize_url()
+            self.oauth2 =   OAuth2(consumer_key, consumer_secret, url, "")
+            creds = LoginFrame.get_user_info()
+
+            token, refresh_token = self.oauth2.get_new_auth_token(
+                consumer_key=consumer_secret,
+                consumer_secret=consumer_secret,
+                username=creds[0],
+                password=creds[1]
+            )
+            print token + ' ' + refresh_token
         elif kwargs.get('oauth1a_3leg'):
             self.oauth1a_3leg = kwargs['oauth1a_3leg']
             oauth_kwargs['callback'] = kwargs['callback']
@@ -89,8 +96,6 @@ class API(object):
     def callback(self):
         return self.oauth.callback
 
-
-
     def __request(self, method, endpoint, data, **kwargs):
         """ Do requests """
         endpoint_url = self.requester.endpoint_url(endpoint)
@@ -101,7 +106,6 @@ class API(object):
 
         if self.token:
             auth_header = {"Authorization": "Bearer " + self.token}
-            # endpoint_url = self.oauth2.
         elif self.oauth2 and not self.token:
             print "we're going to need to get a token, dave."
         elif self.requester.is_ssl is True and self.requester.query_string_auth is False:
@@ -113,11 +117,6 @@ class API(object):
             }
         else:
             endpoint_url = self.oauth.get_oauth_url(endpoint_url, method)
-
-        # Bow before me mortals
-        # Before this statement got memed on it was:
-        # if data is not None:
-        #     data = jsonencode(data, ensure_ascii=False).encode('utf-8')
 
         files = kwargs.get("files", False)
 

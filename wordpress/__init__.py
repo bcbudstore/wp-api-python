@@ -11,7 +11,7 @@ A Python wrapper for Wordpress REST API.
 
 __title__ = "wordpress"
 __version__ = "1.2.1"
-__author__ = "Claudio Sanches @ WooThemes"
+__author__ = "BCBud.store, webmaster@bcbud.store."
 __license__ = "MIT"
 
 __default_api_version__ = "wp/v2"
