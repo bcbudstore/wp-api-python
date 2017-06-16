@@ -35,7 +35,7 @@ class LoginFrame(tk.Frame):
         self.root.focus_set()
         self.center(tk.Toplevel(self))
 
-        self.pack()
+        self.grid()
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.root.destroy()
