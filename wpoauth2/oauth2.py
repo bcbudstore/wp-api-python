@@ -89,15 +89,16 @@ class OAuth2(object):
         return requests.post(self.site + self.token_url, headers=headers, data=data)
 
     def get_new_auth_token(self):
-        while 1:
-            frame = LoginFrame()
-            client_creds = frame.get_user_info()
-            response = self._request_token(
-                consumer_key=self.client_id,
-                consumer_secret=self.client_secret,
-                username=client_creds[0],
-                password=client_creds[1]
-            )
-            if self.is_json(response.text):
-                frame.quit()
-                return { response.json()['access_token'], response.json()['refresh_token'] }
+
+        frame = LoginFrame()
+        client_creds = frame.get_user_info()
+        response = self._request_token(
+            consumer_key=self.client_id,
+            consumer_secret=self.client_secret,
+            username=client_creds[0],
+            password=client_creds[1]
+        )
+        if self.is_json(response.text):
+            frame.quit()
+            return { response.json()['access_token'], response.json()['refresh_token'] }
+        self.get_new_auth_token()
