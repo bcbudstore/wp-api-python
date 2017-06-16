@@ -17,7 +17,7 @@ class LoginFrame(tk.Frame):
             master = tk.Tk()
         self.root = master
         self.root.wm_title("Sign-in Required")
-        self.root.withdraw()
+        # self.root.withdraw()
 
         if not form_caption:
             form_caption = "Please sign in below"
