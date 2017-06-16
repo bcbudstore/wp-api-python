@@ -18,5 +18,5 @@ __license__ = "MIT"
 __default_api_version__ = "wp/v2"
 __default_api__ = "wp-json"
 
-from wpoauth2 import oauth2 as OAuth2
-from wpoauth2 import login_frame as LoginFrame
+from wpoauth2 import oauth2
+from wpoauth2 import login_frame
