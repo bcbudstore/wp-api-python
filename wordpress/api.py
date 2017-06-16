@@ -10,7 +10,7 @@ from json import dumps as jsonencode
 from wordpress.oauth import OAuth, OAuth_3Leg
 from wordpress.transport import API_Requests_Wrapper
 from wordpress.helpers import UrlUtils
-from wpoauth2 import OAuth2, LoginFrame
+from wpoauth2 import oauth2
 
 
 class API(object):
@@ -37,15 +37,9 @@ class API(object):
         if oauth_version is 2 and token:
             self.token = token
         elif oauth_version is 2 and not token:
-            self.oauth2 =   OAuth2(consumer_key, consumer_secret, url, "")
-            creds = LoginFrame.get_user_info()
-
-            token, refresh_token = self.oauth2.get_new_auth_token(
-                consumer_key=consumer_secret,
-                consumer_secret=consumer_secret,
-                username=creds[0],
-                password=creds[1]
-            )
+            self.oauth2 =     oauth2.OAuth2(consumer_key, consumer_secret, url, "")
+            creds = self.oauth2.get_new_auth_token()
+            token, refresh_token = self.oauth2.get_new_auth_token()
             print token + ' ' + refresh_token
         elif kwargs.get('oauth1a_3leg'):
             self.oauth1a_3leg = kwargs['oauth1a_3leg']
