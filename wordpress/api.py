@@ -38,7 +38,6 @@ class API(object):
             self.token = token
         elif oauth_version is 2 and not token:
             self.oauth2 =     oauth2.OAuth2(consumer_key, consumer_secret, url, "")
-            creds = self.oauth2.get_new_auth_token()
             token, refresh_token = self.oauth2.get_new_auth_token()
             print token + ' ' + refresh_token
         elif kwargs.get('oauth1a_3leg'):
