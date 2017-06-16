@@ -89,9 +89,7 @@ class OAuth2(object):
         return requests.post(self.site + self.token_url, headers=headers, data=data)
 
     def get_new_auth_token(self):
-        tk = Tkinter.Tk()
-        done = False
-        while not done:
+        while 1:
             frame = LoginFrame()
             client_creds = frame.get_user_info()
             response = self._request_token(
@@ -100,8 +98,6 @@ class OAuth2(object):
                 username=client_creds[0],
                 password=client_creds[1]
             )
-            done = response
             if self.is_json(response.text):
-                print response.json()
-                frame.destroy()
+                frame.quit()
                 return { response.json()['access_token'], response.json()['refresh_token'] }
