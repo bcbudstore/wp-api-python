@@ -47,7 +47,8 @@ class LoginFrame(tk.Frame):
             return False
 
         self.output = username, password
-        self.quit()
+        self.root.quit();
+        self.root.destroy();
 
     def create_widgets(self):
         self.lbl_caption = tk.Label(
