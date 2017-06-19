@@ -40,11 +40,10 @@ class LoginFrame(tk.Frame):
     def submit(self, username, password):
         if not (username and password):
             tkMessageBox.showerror(self.incomplete_error_title, self.incomplete_error_msg)
-            return False
+        else:
+            self.output = username, password
+            self.root.destroy()
 
-        self.output = username, password
-        self.master.destroy()
-        return
 
     def create_widgets(self):
         self.lbl_caption = tk.Label(

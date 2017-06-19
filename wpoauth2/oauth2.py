@@ -93,8 +93,7 @@ class OAuth2(object):
             if 'access_token' in response.json() and 'refresh_token' in response.json():
                 print response.json()
                 return { response.json()['access_token'], response.json()['refresh_token'] }
-            # else:
-                # self.get_new_auth_token()
+
 
     def is_json(self, data):
         try:
