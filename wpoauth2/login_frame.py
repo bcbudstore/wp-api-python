@@ -42,7 +42,7 @@ class LoginFrame(tk.Frame):
             tkMessageBox.showerror(self.incomplete_error_title, self.incomplete_error_msg)
         else:
             self.output = username, password
-            # self.master.quit()
+            self.master.quit()
 
     def create_widgets(self):
         self.lbl_caption = tk.Label(
@@ -110,4 +110,5 @@ class LoginFrame(tk.Frame):
         toplevel.geometry("%dx%d+%d+%d" % (size + (x, y)))
 
     def close_window(self):
-        self.root.destroy()
+        pass
+        #self.root.destroy()
