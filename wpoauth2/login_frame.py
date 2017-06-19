@@ -42,10 +42,10 @@ class LoginFrame(tk.Frame):
             tkMessageBox.showerror(self.incomplete_error_title, self.incomplete_error_msg)
         else:
             self.output = username, password
-            self.master.destroy()
-            self.master.quit()
+            # self.master.destroy()
+            # self.master.quit()
             self.quit()
-            self.destroy()
+           # self.destroy()
 
 
     def create_widgets(self):
