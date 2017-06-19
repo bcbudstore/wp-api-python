@@ -89,10 +89,12 @@ class OAuth2(object):
             password=client_creds[1]
         )
 
-        if self.is_json(response.text) and all(['access_token', 'refresh_token']) in response.json():
+        if self.is_json(response.text):
+            if 'access_token' in response.json() and 'refresh_token' in response.json():
+                frame.quit()
+                return { response.json()['access_token'], response.json()['refresh_token'] }
             frame.quit()
-            return { response.json()['access_token'], response.json()['refresh_token'] }
-        self.get_new_auth_token()
+            self.get_new_auth_token()
 
     def is_json(self, data):
         try:
