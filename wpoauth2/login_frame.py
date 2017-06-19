@@ -43,6 +43,7 @@ class LoginFrame(tk.Frame):
         else:
             self.output = username, password
             self.root.destroy()
+            self.root.quit()
 
 
     def create_widgets(self):
@@ -94,6 +95,7 @@ class LoginFrame(tk.Frame):
 
     def get_user_info(self):
         self.mainloop()
+        print 'main loop end'
         return self.output
 
     def key_press(self, event):
