@@ -99,7 +99,7 @@ class LoginFrame(tk.Frame):
     def get_user_info(self):
         self.mainloop()
         print 'main loop end'
-        # self.master.destroy()
+        self.master.destroy()
         return self.output
 
     def key_press(self, event):
