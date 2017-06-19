@@ -37,10 +37,6 @@ class LoginFrame(tk.Frame):
         # self.center(tk.Toplevel(self))
         self.grid()
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        # self.root.destroy()
-        pass
-
     def submit(self, username, password):
         if not (username and password):
             tkMessageBox.showerror(self.incomplete_error_title, self.incomplete_error_msg)
@@ -48,6 +44,7 @@ class LoginFrame(tk.Frame):
 
         self.output = username, password
         self.master.destroy()
+        return
 
     def create_widgets(self):
         self.lbl_caption = tk.Label(
