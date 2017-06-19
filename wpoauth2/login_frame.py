@@ -13,7 +13,7 @@ class LoginFrame(tk.Frame):
     output = ''
 
     def __init__(self, master=None, form_caption=False, form_error_msg=False, x=False, y=False, **kw):
-        if not master:
+        if master is None:
             master = tk.Tk()
         self.root = master
         self.root.wm_title("Sign-in Required")
@@ -44,8 +44,7 @@ class LoginFrame(tk.Frame):
             self.output = username, password
             # self.master.destroy()
             # self.master.quit()
-            self.quit()
-            self.destroy()
+
             self.root.destroy()
 
 
