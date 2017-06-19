@@ -92,7 +92,7 @@ class OAuth2(object):
         if self.is_json(response.text):
             if 'access_token' in response.json() and 'refresh_token' in response.json():
                 print response.json()
-                frame.quit()
+                frame.close_window()
                 return { response.json()['access_token'], response.json()['refresh_token'] }
 
 
