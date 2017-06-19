@@ -168,3 +168,7 @@ class API(object):
     def options(self, endpoint):
         """ OPTIONS requests """
         return self.__request("OPTIONS", endpoint, None)
+
+    def set_api_version(self, api):
+        self.requester.set_api_version(api)
+

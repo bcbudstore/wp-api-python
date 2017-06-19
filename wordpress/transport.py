@@ -102,3 +102,6 @@ class API_Requests_Wrapper(object):
 
     def post(self, *args, **kwargs):
         return self.request("POST", *args, **kwargs)
+
+    def set_api_version(self, api):
+        self.api_version = api
