@@ -100,7 +100,7 @@ class LoginFrame(tk.Frame):
         self.mainloop()
         print 'main loop end'
         # self.master.destroy()
-        # return self.output
+        return self.output
 
     def key_press(self, event):
         # frame.focus_set()
