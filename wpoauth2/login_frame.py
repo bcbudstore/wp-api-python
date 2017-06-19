@@ -44,9 +44,6 @@ class LoginFrame(tk.Frame):
             self.output = username, password
             # self.master.quit()
 
-            self.root.destroy()
-
-
     def create_widgets(self):
         self.lbl_caption = tk.Label(
             self,
@@ -113,4 +110,4 @@ class LoginFrame(tk.Frame):
         toplevel.geometry("%dx%d+%d+%d" % (size + (x, y)))
 
     def close_window(self):
-        self.root.destroy()
+        self.tk.destroy()
