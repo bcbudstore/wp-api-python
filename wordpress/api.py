@@ -33,13 +33,12 @@ class API(object):
         )
 
         self.oauth_version = oauth_version
-
         if oauth_version is 2 and token:
             self.token = token
         elif oauth_version is 2 and not token:
             self.oauth2 =     oauth2.OAuth2(consumer_key, consumer_secret, url, "")
             token, refresh_token = self.oauth2.get_new_auth_token()
-            print token + ' ' + refresh_token
+            self.token = token
         elif kwargs.get('oauth1a_3leg'):
             self.oauth1a_3leg = kwargs['oauth1a_3leg']
             oauth_kwargs['callback'] = kwargs['callback']

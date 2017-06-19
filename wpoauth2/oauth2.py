@@ -61,22 +61,13 @@ class OAuth2(object):
 
         return content
 
-    def is_json(self, data):
-        try:
-            json_object = json.loads(data)
-        except ValueError, e:
-            return False
-        return True
-
-    def _request_token(self, username, password, consumer_key=False, consumer_secret=False):
-
+    def request_grant_token(self, username, password, consumer_key=False, consumer_secret=False):
         base64string = base64.encodestring('%s:%s' % (self.client_id, self.client_secret)).replace('\n', '')
         headers = {
             "Authorization": "Basic %s" % base64string,
             "Content-Type": "application/x-www-form-urlencoded",
             "user-agent": "BCBS Wordpress API Client-Python, oauth2",
-            "accept": "application/json",
-
+            "accept": "application/json"
         }
         data = {
             'client_id': self.client_id,
@@ -89,10 +80,9 @@ class OAuth2(object):
         return requests.post(self.site + self.token_url, headers=headers, data=data)
 
     def get_new_auth_token(self):
-
         frame = LoginFrame()
         client_creds = frame.get_user_info()
-        response = self._request_token(
+        response = self.request_grant_token(
             consumer_key=self.client_id,
             consumer_secret=self.client_secret,
             username=client_creds[0],
@@ -102,3 +92,10 @@ class OAuth2(object):
             frame.quit()
             return { response.json()['access_token'], response.json()['refresh_token'] }
         self.get_new_auth_token()
+
+    def is_json(self, data):
+        try:
+            json_object = json.loads(data)
+        except ValueError, e:
+            return False
+        return True
