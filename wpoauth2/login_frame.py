@@ -110,4 +110,4 @@ class LoginFrame(tk.Frame):
         toplevel.geometry("%dx%d+%d+%d" % (size + (x, y)))
 
     def close_window(self):
-        self.quit()
+        self.root.destroy()
