@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 version = '0.2.0'
 
 setup(
-    name='wp-oauth2',
+    name='wpoauth2',
     version=version,
     description='Open Authentication 2 support to Python-requests HTTP library. Includes client grants and tokens.',
     long_description=open('README.md').read(),
