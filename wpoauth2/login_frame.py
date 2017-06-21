@@ -92,6 +92,7 @@ class LoginFrame(tk.Frame):
         self.btn_login.grid(row=2, rowspan=2, column=3, padx=5)
 
     def get_user_info(self):
+
         self.mainloop()
         print 'main loop end'
         return self.output
