@@ -139,4 +139,5 @@ class LoginFrame(tk.Frame):
         """
         Destroy this login frame
         """
+        self.quit()
         self.master.destroy()
