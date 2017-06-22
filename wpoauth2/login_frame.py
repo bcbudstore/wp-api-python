@@ -13,6 +13,16 @@ class LoginFrame(tk.Frame):
     output = ''
 
     def __init__(self, master=None, form_caption=False, form_error_msg=False, x=False, y=False, **kw):
+        """
+        Initialize a new LoginFrame
+        :param master:
+        :param form_caption:
+        :param form_error_msg:
+        :param x:
+        :param y:
+        :param kw:
+        """
+
         if master is None:
             master = tk.Tk()
         self.root = master
@@ -22,7 +32,7 @@ class LoginFrame(tk.Frame):
         if not form_caption:
             form_caption = "Please sign in below"
         self.form_caption = form_caption
-
+        # incomplete form dialog
         self.incomplete_error_title = "Username and Password required"
         self.incomplete_error_msg = "You must provide both a username and a password, please try again."
         self.form_error_msg = form_error_msg
@@ -38,6 +48,11 @@ class LoginFrame(tk.Frame):
         self.grid()
 
     def submit(self, username, password):
+        """
+        Credentials submit callback
+        :param username:
+        :param password:
+        """
         if not (username and password):
             tkMessageBox.showerror(self.incomplete_error_title, self.incomplete_error_msg)
         else:
@@ -45,6 +60,9 @@ class LoginFrame(tk.Frame):
             self.master.quit()
 
     def create_widgets(self):
+        """
+        Initialize form controls
+        """
         self.lbl_caption = tk.Label(
             self,
             text=self.form_caption
@@ -92,16 +110,23 @@ class LoginFrame(tk.Frame):
         self.btn_login.grid(row=2, rowspan=2, column=3, padx=5)
 
     def get_user_info(self):
-
+        """
+        The main entry point that Oauth2 will call
+        when a grant refresh is required
+        :return:
+        """
         self.mainloop()
-        print 'main loop end'
         return self.output
 
-    def key_press(self, event):
-        # frame.focus_set()
-        print event.keys()
+    # def key_press(self, event):
+    #     # frame.focus_set()
+    #     print event.keys()
 
     def center(self, toplevel):
+        """
+        Centers the frame in the toplevel element window
+        :param toplevel:
+        """
         toplevel.update_idletasks()
         w = toplevel.winfo_screenwidth()
         h = toplevel.winfo_screenheight()
@@ -111,4 +136,7 @@ class LoginFrame(tk.Frame):
         toplevel.geometry("%dx%d+%d+%d" % (size + (x, y)))
 
     def close_window(self):
+        """
+        Destroy this login frame
+        """
         self.master.destroy()
