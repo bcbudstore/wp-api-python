@@ -63,15 +63,10 @@ class API_Requests_Wrapper(object):
         if data is not None and not files:
             headers["content-type"] = "application/json;charset=utf-8"
 
-
         args_headers = kwargs.get("headers", False)
-        print args_headers
-
         if args_headers:
             for k, v in args_headers.iteritems():
-
                 headers[k] = v
-
         kwargs["headers"] = headers
 
         request_kwargs = dict(
@@ -84,13 +79,9 @@ class API_Requests_Wrapper(object):
         )
         request_kwargs.update(kwargs)
 
-        # print "HEADERS DICT after: " + str(headers)
-        # print "REQUEST KWARGS :" + str(request_kwargs)
-
         if auth is not None: request_kwargs['auth'] = auth
         if params is not None: request_kwargs['params'] = params
         if data is not None: request_kwargs['data'] = data
-
         # print "REQUEST KWARGS :" + str(request_kwargs)
 
         return self.session.request(

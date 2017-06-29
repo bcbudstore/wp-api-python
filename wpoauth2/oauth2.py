@@ -16,6 +16,10 @@ import base64
 import tkMessageBox
 from login_frame import LoginFrame
 
+import sys
+sys.path.append('C:/Users/Andrew/Desktop/bcbstore/POSSystem/')
+from SharedUtilities import printt
+
 
 class OAuth2(object):
     authorization_url = '/oauth/authorize'
@@ -89,23 +93,28 @@ class OAuth2(object):
             password=client_creds[1]
         )
 
-        # print response.json()
-        print response.status_code
+        printt(response.status_code)
+        if response.status_code is 401:
+            tkMessageBox.showerror(
+                "Error Authenticating with the Server",
+                str("There was an issue while authenticating with the store. You've entered an incorrect username"
+                    "or password. Please try again and if the issue persists then reset your store password."))
 
-        if not (response.status_code is 200 and self.is_json(response.text)):
+        elif not (response.status_code is 200 and self.is_json(response.text)):
             tkMessageBox.showerror(
                 "Error Authenticating with the Server",
                 str("There was an issue while authenticating with the store. This is probably due to a communications "
-                    "issue, and not your password. If after trying again in 10 minutes the issue persists, please " 
-                    "contact webmaster@bcbud.store."))
+                    "issue, and changing your password will likely not help. If after trying again in 10 minutes the "
+                    "issue persists, please contact webmaster@bcbud.store.")
+            )
 
-            print "There was an issue while authenticating with the store. Details: \n" + response.status_code
-            print "Response that indicated an exception:  \n" + response.json()
-            exit(response.status_code)
+            printt("There was an issue while authenticating with the store. Details: \n" + str(response.status_code))
+            printt("Response that indicated an exception:")
+            printt(response.json())
+            return { }
 
         if 'access_token' in response.json() and 'refresh_token' in response.json():
-            print response.json()
-            frame.close_window()
+            printt(response.json(), True)
             return { response.json()['access_token'], response.json()['refresh_token'] }
 
     def is_json(self, data):

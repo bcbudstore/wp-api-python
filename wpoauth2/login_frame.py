@@ -53,11 +53,12 @@ class LoginFrame(tk.Frame):
         :param username:
         :param password:
         """
-        if not (username and password):
+        if not username or not password:
             tkMessageBox.showerror(self.incomplete_error_title, self.incomplete_error_msg)
         else:
             self.output = username, password
-            self.master.quit()
+
+        self.close_window()
 
     def create_widgets(self):
         """
@@ -139,5 +140,6 @@ class LoginFrame(tk.Frame):
         """
         Destroy this login frame
         """
-        self.quit()
-        self.master.destroy()
+        self.destroy()
+        self.master.quit()
+        self.root.destroy()

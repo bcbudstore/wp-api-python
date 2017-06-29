@@ -18,12 +18,10 @@ class API(object):
 
     token = ''
     oauth_version = 1
-    oauth2 = False
+
 
     def __init__(self, url, consumer_key, consumer_secret, oauth_version=1, token='', **kwargs):
-
         self.requester = API_Requests_Wrapper(url=url, **kwargs)
-
         oauth_kwargs = dict(
             requester=self.requester,
             consumer_key=consumer_key,
@@ -32,11 +30,12 @@ class API(object):
             force_timestamp=kwargs.get('force_timestamp')
         )
 
+        self.oauth2 = None
         self.oauth_version = oauth_version
         if oauth_version is 2 and token:
             self.token = token
         elif oauth_version is 2 and not token:
-            self.oauth2 =     oauth2.OAuth2(consumer_key, consumer_secret, url, "")
+            self.oauth2 = oauth2.OAuth2(consumer_key, consumer_secret, url, "")
             token, refresh_token = self.oauth2.get_new_auth_token()
             self.token = token
         elif kwargs.get('oauth1a_3leg'):
