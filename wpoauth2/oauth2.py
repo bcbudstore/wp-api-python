@@ -110,11 +110,9 @@ class OAuth2(object):
 
             printt("There was an issue while authenticating with the store. Details: \n" + str(response.status_code))
             printt("Response that indicated an exception:")
-            printt(response.json())
             return { }
 
         if 'access_token' in response.json() and 'refresh_token' in response.json():
-            printt(response.json(), True)
             return { response.json()['access_token'], response.json()['refresh_token'] }
 
     def is_json(self, data):
