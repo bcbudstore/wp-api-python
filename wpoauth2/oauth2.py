@@ -83,37 +83,50 @@ class OAuth2(object):
 
         return requests.post(self.site + self.token_url, headers=headers, data=data)
 
-    def get_new_auth_token(self):
-        frame = LoginFrame()
+    def request_auth_token(self, error_title=None):
+        if not error_title:
+            error_title = "Error Authenticating with the Server"
+
+        frame = LoginFrame(width=600, height=325)
         client_creds = frame.get_user_info()
+
         response = self.request_grant_token(
             consumer_key=self.client_id,
             consumer_secret=self.client_secret,
             username=client_creds[0],
             password=client_creds[1]
         )
-
         printt(response.status_code)
-        if response.status_code is 401:
-            tkMessageBox.showerror(
-                "Error Authenticating with the Server",
-                str("There was an issue while authenticating with the store. You've entered an incorrect username"
-                    "or password. Please try again and if the issue persists then reset your store password."))
 
-        elif not (response.status_code is 200 and self.is_json(response.text)):
+        if response.status_code in (403, 401):
             tkMessageBox.showerror(
-                "Error Authenticating with the Server",
-                str("There was an issue while authenticating with the store. This is probably due to a communications "
-                    "issue, and changing your password will likely not help. If after trying again in 10 minutes the "
-                    "issue persists, please contact webmaster@bcbud.store.")
+                error_title,
+                str("There was an issue while authenticating with the store! \n You've entered an incorrect username "
+                    "or password. Please try again later. If the issue persists then please reset your store password."))
+            return {}
+        elif not self.is_json(response.text):
+            tkMessageBox.showerror(
+                error_title,
+                str("There was an issue while authenticating with the store — the response returned from the server was"
+                    "unexpected and authentication cannot continue.\nPlease try again later. If the issue persists,"
+                    " contact: webmaster@bcbud.store for assistance."))
+            return {}
+        elif not (response.status_code == 200):
+            tkMessageBox.showerror(
+                error_title,
+                str("There was an unknown issue while authenticating with the store. This is likely caused by a "
+                    "communications issue, and is (probably) not an issue with your password. Please try again in 10 "
+                    "minutes, and if the issue persists contact: webmaster@bcbud.store for assistance.")
             )
-
             printt("There was an issue while authenticating with the store. Details: \n" + str(response.status_code))
             printt("Response that indicated an exception:")
-            return { }
-
-        if 'access_token' in response.json() and 'refresh_token' in response.json():
-            return { response.json()['access_token'], response.json()['refresh_token'] }
+            printt(response, pretty=True)
+            return {}
+        elif 'access_token' in response.json() and 'refresh_token' in response.json():
+            return {
+                response.json()['access_token'],
+                response.json()['refresh_token']
+            }
 
     def is_json(self, data):
         """
